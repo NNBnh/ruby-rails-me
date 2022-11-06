@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby, Rails and Me</title>
+  <link rel="icon" href="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../releases/preview/2015/png/iconmonstr-diamond-7.png&r=250&g=120&b=131" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@2.36.1/dist/full.css" rel="stylesheet" type="text/css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<link href="https://unpkg.com/prismjs@v1.x/themes/prism.css" rel="stylesheet">
+</head>
+<body
+  data-theme="coffee"
+  class="static"
+  x-data="{ slide: $persist(0) }"
+  @keydown.left="if(slide > 0) slide--"
+  @keydown.right="if(slide < 999) slide++"
+>
+
+<div
+  class="absolute left-4 top-2 font-mono text-white opacity-50"
+  x-text="slide"
+></div>
+
+<div>
+
+<section x-show="slide === 0" class="w-full h-screen flex flex-col items-center justify-center gap-8">
+  <h1 class="text-8xl font-bold text-primary">Ruby, Rail and Me</h1>
+  <p class="text-4xl text-neutral-content animate-bounce">By NNB</p>
+</section>
+
+<section x-show="slide === 1" class="w-full h-screen flex flex-col items-center justify-center text-3xl text-neutral-content">
+  <ul class="list-outside list-disc">
+    <li>
+      1. Ruby:
+      <ul class="list-inside list-disc">
+        <li>Giới thiệu.</li>
+        <li>Thuật toán.</li>
+        <li>OOP.</li>
+      </ul>
+    </li>
+    <br>
+    <li>
+      2. Rails:
+      <ul class="list-inside list-disc">
+        <li>Frontend framework.</li>
+        <li>Kết nối CSDL.</li>
+        <li>Xác thực JWT khi login.</li>
+        <li>Websocket.</li>
+        <li>REST API.</li>
+        <li>Concurrency.</li>
+        <li>Docker.</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<section x-show="slide === 2" class="w-full h-screen flex flex-col items-center justify-center">
+  <h1 class="text-8xl font-bold text-primary">1. Ruby</h1>
+</section>
+
+<section x-show="slide === 3" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">1.1. Giới thiệu</h2>
+</section>
+
+<section x-show="slide === 4" class="w-full h-screen flex flex-col items-center justify-center">
+  <p class="text-4xl font-mono">
+    <span class="text-neutral-content">puts</span>
+    <span class="text-lime-500">'Hello, World!'</span>
+  </p>
+</section>
+
+<section x-show="slide === 5" class="w-full h-screen flex flex-col items-center justify-center gap-8">
+  <h2 class="py-8 text-3xl font-bold text-primary">
+    Các cấu trúc dữ liệu cơ sở
+  </h2>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">sample_int    = 5
+sample_float  = 3.14
+sample_string = "Hello, World!\n"
+sample_bool0  = true
+sample_symbol = :admin
+sample_range  = 1..100
+sample_array  = [1, 2, 3, 4, 5]
+sample_hash   = { name: 'Joe', age: 24 }
+sample_nil    = nil</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 6" class="w-full h-screen flex flex-row">
+  <div class="w-1/2 h-full flex items-center justify-center">
+    <div class="mockup-window bg-base-300" data-theme="light">
+      <pre><code class="language-ruby">foods = ['apple', 'cake', 'candy', 'rice']
+foods[0] # => 'apple'
+foods[2] # => 'candy'
+foods[-1] # => 'rice'
+foods[0..2] # => ['apple', 'cake', 'candy']
+
+arr = [*1..10] # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+for i in arr
+  puts ' *' * i
+end
+# Nhưng chuẩn hơn là
+arr.each do |i|
+  puts ' *' * i
+end
+# Hoặc tốt hơn nữa là
+arr.each { puts ' *' * _1 }</code></pre>
+    </div>
+  </div>
+  <div class="w-1/2 h-full p-8 flex flex-col items-center justify-center gap-8">
+    <h2 class="py-8 text-3xl font-bold text-primary">Mảng</h2>
+    <div class="mockup-code">
+      <pre data-prefix="$"><code>ruby ./array.rb</code></pre>
+      <pre><code>
+      *
+      * *
+      * * *
+      * * * *
+      * * * * *
+      * * * * * *
+      * * * * * * *
+      * * * * * * * *
+      * * * * * * * * *
+      * * * * * * * * * *
+                                                 </code></pre>
+    </div>
+  </div>
+</section>
+
+<section x-show="slide === 7" class="w-full h-screen flex flex-row">
+  <div class="w-1/2 h-full p-8 flex flex-col items-center justify-center gap-8">
+    <h2 class="py-8 text-3xl font-bold text-primary">Hash</h2>
+    <div class="mockup-window bg-base-300" data-theme="light">
+      <pre><code class="language-ruby">example = {
+  'foo' => 'bar',
+  'number' => 23,
+  1 => [1, 2, 3],
+  [1, 2, 3] => 3.14,
+  :symbol => :test,
+}
+
+example['foo'] # => 'bar'
+example[1] # => [1, 2, 3]
+example[[1, 2, 3]] # => 3.14
+example[:symbol] # => :test                      </code></pre>
+    </div>
+  </div>
+  <div class="w-1/2 h-full flex items-center justify-center">
+    <div class="mockup-window bg-base-300" data-theme="light">
+      <pre><code class="language-ruby">user = {
+  name: 'Joe',
+  age: 32,
+  roles: [:admin, :manager],
+}
+
+user_test = {
+  :name => 'Joe',
+  :age  => 32,
+  :roles => [:admin, :manager],
+}
+
+user = user_test # => true
+
+user[:name] # => 'Joe'
+user[:age] # => 32
+user[:roles] # => [:admin, :manager]             </code></pre>
+    </div>
+  </div>
+</section>
+
+<section x-show="slide === 8" class="w-full h-screen flex flex-row items-center justify-center gap-32">
+  <h2 class="py-8 text-3xl font-bold text-primary">
+    Hầu hết mọi thứ đều là<br>Class hoặc Object!
+  </h2>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">'Hello, World!'.size # => 13
+[1, 2, 3, 4, 5].size # => 5
+[1, 2, 3, 4, 5].sum # => 15
+[].empty? # => true
+
+2.to_s # => '2'
+'3'.to_i # => 3
+
+b = 2
+b.zero? # => false
+
+c = 'hello world'
+c.upcase! # => "HELLO WOWLD"
+c.reverse! # => "DLROW OLLEH"
+
+'hello world'.upcase.reverse # => "DLROW OLLEH"</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 9" class="w-full h-screen flex flex-col items-center justify-center gap-8">
+  <p class="text-4xl font-bold text-neutral-content">Bài toán lập trình: Next Bigger</p>
+  <p class="text-2xl text-neutral-content">
+    Tìm số lớn hơn tiếp theo của n bằng cách sắp xếp các chữ số của chính nó.
+  </p>
+  <div class="mockup-code">
+    <pre class="text-base-content"><code>...</code></pre>
+    <pre data-prefix="<"><code>1207</code></pre>
+    <pre data-prefix="<"><code>1270</code></pre>
+    <pre data-prefix="<"><code>1702</code></pre>
+    <pre data-prefix="<"><code>1720</code></pre>
+    <pre data-prefix="=" class="text-warning"><code>2017</code></pre>
+    <pre data-prefix=">" class="bg-success text-success-content"><code>2071</code></pre>
+    <pre data-prefix=">"><code>2107</code></pre>
+    <pre data-prefix=">"><code>2170</code></pre>
+    <pre data-prefix=">"><code>2701</code></pre>
+    <pre data-prefix=">"><code>2710</code></pre>
+    <pre class="text-base-content"><code>...</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 10" class="w-full h-screen flex flex-row items-center justify-center gap-8">
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-python">def next_bigger(number,n):
+    for i in range(n-1,0,-1):
+        if number[i] > number[i-1]:
+            break
+    if i == 1 and number[i] <= number[i-1]:
+        print ("Next number not possible")
+        return
+    x = number[i-1]
+    smallest = i
+    for j in range(i+1,n):
+        if number[j] > x and number[j] < number[smallest]:
+            smallest = j
+    number[smallest],number[i-1] = number[i-1], number[smallest]
+    x = 0
+    for j in range(i):
+        x = x * 10 + number[j]
+    number = sorted(number[i:])
+    for j in range(n-i):
+        x = x * 10 + number[j]
+    return x</code></pre>
+  </div>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-python">function next_bigger(number, n) {
+    for(var i = n - 1; i >= 0; i--) {
+        if (number[i] > number[i - 1]) break;
+    }
+    if (i == 1 && number[i] <= number[i - 1]) return null;
+    let x = number[i - 1];
+    let smallest = i;
+    for(let j = i + 1; j < n; j++) {
+        if (number[j] > x &&
+            number[j] < number[smallest])
+        smallest = j;
+    }
+    let temp = number[smallest];
+    number[smallest] = number[i - 1];
+    number[i - 1] = temp;
+    x = 0; for(let j = 0; j < i; j++) x = x * 10 + number[j];
+    number = number.slice(i, number.length + 1); number.sort()
+    for(let j = 0; j < n - i; j++) x = x * 10 + number[j];
+    return x;
+}</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 11" class="w-full h-screen flex flex-col items-center justify-center gap-16">
+  <p class="text-3xl font-bold text-neutral-content">The Ruby way:</p>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">def next_bigger(n) = n.to_s.chars.permutation.map(&:join).map(&:to_i).sort.find { _1 > n }</code></pre>
+  </div>
+  <p class="text-3xl font-mono text-success animate-bounce">1 dòng! 90 Ký tự!</p>
+</section>
+
+<section x-show="slide === 12" class="w-full h-screen p-8 flex flex-col items-center justify-center gap-4">
+  <p class="text-3xl font-bold text-neutral-content">Ruby in action:</p>
+  <div class="mockup-window grow aspect-[9/7] bg-base-300">
+    <script
+      id="asciicast-C2EWMthPE0CdQdLCxmhq0mD69"
+      src="https://asciinema.org/a/C2EWMthPE0CdQdLCxmhq0mD69.js"
+      async
+    ></script>
+  </div>
+</section>
+
+<section x-show="slide === 13" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">1.2. Thuật toán</h2>
+</section>
+
+<section x-show="slide === 14" class="w-full h-screen flex flex-row items-center justify-center gap-16">
+  <div class="max-w-lg flex flex-col gap-8">
+    <h2 class="text-3xl font-bold text-primary">Sắp xếp nổi bọt</h2>
+    <p class="text-justify text-neutral-content">
+      Sắp xếp nổi bọt (bubble sort) là một thuật toán sắp xếp đơn giản, với thao tác cơ
+      bản là so sánh hai phần tử kề nhau, nếu chúng chưa đứng đúng thứ tự thì đổi chỗ (swap). Có thể
+      tiến hành từ trên xuống (bên trái sang) hoặc từ dưới lên (bên phải sang).
+    </p>
+  </div>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">def bubble_sort(a)
+  loop do
+    swapped = false
+
+    (a.size - 1).times do |i|
+      next if a[i] <= a[i+1]
+      a[i], a[i+1] = a[i+1], a[i]
+      swapped = true
+    end
+
+    break unless swapped
+  end
+
+  a
+end
+
+arr = [*0..9].shuffle # => [7, 5, 3, 9, 6, 8, 2, 0, 4, 1]
+bubble_sort arr # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 15" class="w-full h-screen flex flex-col items-center justify-center gap-16">
+  <p class="text-3xl font-bold text-neutral-content">Phương pháp cải thiện:</p>
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">def bubble_sort(a)
+  loop until (a.size - 1).times.none? do |i|
+    a[i], a[i+1] = a[i+1], a[i] if a[i] > a[i+1]
+  end
+  a
+end</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 16" class="w-full h-screen flex flex-row items-center justify-center gap-16">
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">def insertion_sort(a)
+  0.upto a.size - 2 do |i|
+    i.downto 0 do |j|
+      a[j], a[j+1] = a[j+1], a[j] if a[j] > a[j+1]
+    end
+  end
+  a
+end
+
+arr = [*0..9].shuffle # => [6, 8, 3, 0, 9, 2, 1, 7, 4, 5]
+insertion_sort arr # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+  </div>
+  <div class="max-w-lg flex flex-col gap-8">
+    <h2 class="text-3xl font-bold text-primary">Sắp xếp chèn</h2>
+    <p class="text-justify text-neutral-content">
+      Sắp xếp chèn (insertion sort) là một thuật toán sắp xếp bắt chước cách sắp xếp quân bài của
+      những người chơi bài. Muốn sắp một bộ bài theo trật tự người chơi bài rút lần lượt từ quân thứ
+      2, so với các quân đứng trước nó để chèn vào vị trí thích hợp.
+    </p>
+  </div>
+</section>
+
+<section x-show="slide === 17" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">1.3. OOP</h2>
+</section>
+
+<section x-show="slide >= 18 && slide <= 22" class="w-full h-screen flex items-center justify-center">
+  <div x-show="slide === 18" class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">class Dice
+end                 </code></pre>
+  </div>
+  <div x-show="slide === 19" class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">class Dice
+  def initialize(face = 6)
+    @result = nil
+    @face = face
+  end
+end</code></pre>
+  </div>
+  <div x-show="slide === 20" class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">class Dice
+  def initialize(face = 6)
+    @result = nil
+    @face = face
+  end
+
+  def roll
+    @result = rand 1..face
+  end
+
+  def unroll
+    @result = nil
+  end
+end                           </code></pre>
+  </div>
+  <div x-show="slide === 21" class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">class Dice
+  def initialize(face = 6)
+    @result = nil
+    @face = face
+  end
+
+  attr_reader :result
+  attr_accessor :face
+
+  def roll
+    @result = rand 1..face
+  end
+
+  def unroll
+    @result = nil
+  end
+end                                     </code></pre>
+  </div>
+  <div x-show="slide === 22" class="mockup-code">
+    <pre data-prefix="&#x276F"><code>my_lucky_dice = Dice.new 8</code></pre>
+    <pre><code class="text-success">=&gt; #&lt;Dice:0x00007f0e3a1ccb00 @face=8, @result=nil&gt;</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.face</code></pre>
+    <pre><code class="text-accent">=&gt; 8</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.roll</code></pre>
+    <pre><code class="text-accent">=&gt; 2</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.roll</code></pre>
+    <pre><code class="text-accent">=&gt; 7</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.roll</code></pre>
+    <pre><code class="text-accent">=&gt; 5</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.result</code></pre>
+    <pre><code class="text-accent">=&gt; 5</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.unroll</code></pre>
+    <pre><code class="text-secondary">=&gt; nil</code></pre>
+    <pre data-prefix="&#x276F"><code>my_lucky_dice.result</code></pre>
+    <pre><code class="text-secondary">=&gt; nil</code></pre>
+  </div>
+</section>
+
+<section x-show="slide >= 23 && slide <= 25" class="w-full h-screen flex flex-row items-center justify-center gap-4">
+  <div class="mockup-window bg-base-300" data-theme="light">
+    <pre><code class="language-ruby">class Dice
+  def initialize(face = 6)
+    @result = nil
+    @face = face
+  end
+
+  attr_reader :result
+  attr_accessor :face
+
+  def roll
+    @result = rand 1..face
+  end
+
+  def unroll
+    @result = nil
+  end
+end                                     </code></pre>
+  </div>
+  <div
+    class="mockup-window bg-base-300"
+    :class="slide >= 24 ? '' : 'opacity-20'"
+    data-theme="light"
+  >
+    <pre><code class="language-ruby">class MultiplyDice < Dice
+  def initialize(face = 6, multiplier: 2)
+    super(face)
+    @multiplier = multiplier
+  end
+
+  attr_reader :multiplier
+
+  def roll
+    @result = rand(1..face) * multiplier
+  end
+end
+
+
+
+
+
+</code></pre>
+  </div>
+  <div
+    class="mockup-window bg-base-300"
+    :class="slide >= 25 ? '' : 'opacity-20'"
+    data-theme="light"
+  >
+    <pre><code class="language-ruby">class FiniteDice < Dice
+  def initialize(face = 6, time: 1)
+    super(face)
+    @time = time
+  end
+
+  attr_reader :time
+
+  def roll
+    return if @time <= 0
+    @time -= 1
+    @result = rand 1..face
+  end
+end
+
+
+                                        </code></pre>
+  </div>
+</section>
+
+</div>
+
+<div class="bg-[#330C0C]">
+
+<section x-show="slide === 26" class="w-full h-screen flex flex-col items-center justify-center">
+  <h1 class="text-8xl font-bold text-primary">2. Rails</h1>
+</section>
+
+<section x-show="slide === 27" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.1. Khởi tạo</h2>
+</section>
+
+<section x-show="slide === 28" class="w-full h-screen flex flex-col items-center justify-center gap-8">
+  <p class="text-4xl font-bold text-neutral-content">Frontend framework, CSS framework, Database</p>
+  <div class="mockup-code">
+    <pre data-prefix="&#x276F"><code>rails new demoman --webpack alpine --css tailwind --database postgresql</code></pre>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>Thành phần</th>
+          <th>Danh sách</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frontend framework</td>
+          <td>Angular, React, Vue.js, Svelte, Alpine.js, ...</td>
+        </tr>
+        <tr>
+          <td>CSS framework</td>
+          <td>TailwindCSS, Bootstrap, Bulma, PostCSS, ...</td>
+        </tr>
+        <tr>
+          <td>Database</td>
+          <td>MySQL, PostgreSQL, SQLite, Oracle, MongoDB, ...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section x-show="slide === 29" class="w-full h-screen flex flex-col items-center justify-center">
+  <div class="mockup-window w-3/4 bg-base-300" data-theme="light">
+    <img src="screenshot0.png">
+  </div>
+</section>
+
+<section x-show="slide === 30" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.2. Database</h2>
+</section>
+
+<section x-show="slide === 31" class="w-full h-screen flex flex-col items-center justify-center">
+  <div class="mockup-code">
+    <pre data-prefix="&#x276F"><code>rails generate scaffold post message:string like:integer time:datetime</code></pre>
+    <pre><code class="text-secondary">  invoke  active_record
+    create    db/migrate/20221103071331_create_posts.rb
+    create    app/models/post.rb
+    invoke    test_unit
+    create      test/models/post_test.rb
+    create      test/fixtures/posts.yml
+    invoke  resource_route
+     route    resources :posts
+    invoke  scaffold_controller
+    create    app/controllers/posts_controller.rb
+    invoke    erb
+    ...</code></pre>
+    <pre data-prefix="&#x276F"><code>rails db:migrate</code></pre>
+  </div>
+</section>
+
+<section x-show="slide >= 32 && slide <= 33" class="w-full h-screen flex flex-col items-center justify-center">
+  <video x-show="slide === 32" class="w-3/4 rounded-xl" controls>
+    <source src="screencast0.webm" type="video/webm">
+  </video>
+  <video x-show="slide === 33" class="w-3/4 rounded-xl" controls>
+    <source src="screencast1.webm" type="video/webm">
+  </video>
+</section>
+
+<section x-show="slide === 34" class="w-full h-screen flex flex-row items-center justify-center gap-16">
+  <div class="mockup-code">
+    <pre><code class="text-secondary">/Gemfile</code></pre>
+    <pre data-prefix=" "><code class="text-secondary">...</code></pre>
+    <pre data-prefix=" "><code>ruby "3.1.2"</code></pre>
+    <pre data-prefix=" "><code>gem "rails", "~> 7.0.4"</code></pre>
+    <pre data-prefix=" "><code>gem "sprockets-rails"</code></pre>
+    <pre data-prefix="+" class="bg-secondary text-secondary-content"><code>gem "devise", "~> 4.8", '>= 4.8.1'</code></pre>
+    <pre data-prefix=" "><code class="text-secondary">...</code></pre>
+  </div>
+  <div class="mockup-code">
+    <pre data-prefix="&#x276F"><code>bundle install</code></pre>
+    <pre><code class="text-secondary">  Fetching gem metadata from https://rubygems.org/..........
+    Resolving dependencies.........
+    Using rake 13.0.6
+    Using concurrent-ruby 1.1.10
+    ...</code></pre>
+    <pre><code class="text-success">  Bundle complete! 16 Gemfile dependencies, 77 gems now installed.
+    Use `bundle info [gemname]` to see where a bundled gem is installed.</code></pre>
+    <pre data-prefix="&#x276F"><code>rails generate devise:install</code></pre>
+    <pre><code class="text-secondary">  create  config/initializers/devise.rb
+    create  config/locales/devise.en.yml
+    ...</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 35" class="w-full h-screen flex flex-col items-center justify-center">
+  <div class="mockup-code">
+    <pre data-prefix="&#x276F"><code>rails generate devise:views</code></pre>
+    <pre><code class="text-secondary">  invoke  Devise::Generators::SharedViewsGenerator
+    create    app/views/devise/shared
+    create    app/views/devise/shared/_error_messages.html.erb
+    create    app/views/devise/shared/_links.html.erb
+    invoke  form_for
+    create    app/views/devise/confirmations
+    create    app/views/devise/confirmations/new.html.erb
+    ...</code></pre>
+    <pre data-prefix="&#x276F"><code>rails generate devise user</code></pre>
+    <pre><code class="text-secondary">  invoke  active_record
+    create    db/migrate/20221103170035_devise_create_users.rb
+    create    app/models/user.rb
+    invoke    test_unit
+    create      test/models/user_test.rb
+    create      test/fixtures/users.yml
+    insert    app/models/user.rb
+    route  devise_for :users</code></pre>
+    <pre data-prefix="&#x276F"><code>rails db:migrate</code></pre>
+  </div>
+</section>
+
+<section x-show="slide === 999" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.3. Websocket</h2>
+</section>
+
+<section x-show="slide === 999" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.4. RESTful API</h2>
+</section>
+
+<section x-show="slide === 999" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.5. Concurrency</h2>
+</section>
+
+<section x-show="slide === 999" class="w-full h-screen flex flex-col items-center justify-center">
+  <h2 class="text-6xl font-bold text-primary">2.6. Docker</h2>
+</section>
+
+</div>
+
+<script src="https://unpkg.com/prismjs@v1.x/components/prism-core.min.js"></script>
+<script src="https://unpkg.com/prismjs@v1.x/plugins/autoloader/prism-autoloader.min.js"></script>
+
+</body>
+</html>
